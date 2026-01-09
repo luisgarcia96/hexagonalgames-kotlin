@@ -14,4 +14,14 @@
   <string name="contentDescription_more">More</string>
   <string name="contentDescription_notification_icon">Icone de notification</string>
   <string name="error_title">Title not valid</string>
+  <string name="sign_in_title">Sign in to continue</string>
+  <string name="label_email">Email</string>
+  <string name="label_password">Password</string>
+  <string name="action_sign_in">Sign in</string>
+  <string name="action_create_account">Create account</string>
+  <string name="action_back_to_sign_in">Back to sign in</string>
+  <string name="action_reset_password">Reset password</string>
+  <string name="action_logout">Log out</string>
+  <string name="sign_up_title">Create your account</string>
+  <string name="reset_title">Reset your password</string>
 </resources>

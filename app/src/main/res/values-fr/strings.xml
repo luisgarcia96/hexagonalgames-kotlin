@@ -1,7 +1,7 @@
 <resources>
   <string name="app_name">Hexagonal Games</string>
   <string name="action_settings">Paramètres</string>
-  <string name="homefeed_fragment_label">Home</string>
+  <string name="homefeed_fragment_label">Accueil</string>
   <string name="add_fragment_label">Ajout d\'une publication</string>
   <string name="by">Par %1$s %2$s</string>
   <string name="notification_enable">Activer les notifications</string>
@@ -12,6 +12,16 @@
   <string name="action_save">Sauvegarder</string>
   <string name="contentDescription_go_back">Retour</string>
   <string name="contentDescription_more">Plus</string>
-  <string name="contentDescription_notification_icon">Notification icon</string>
+  <string name="contentDescription_notification_icon">Icône de notification</string>
   <string name="error_title">Titre non valide</string>
+  <string name="sign_in_title">Connectez-vous pour continuer</string>
+  <string name="label_email">E-mail</string>
+  <string name="label_password">Mot de passe</string>
+  <string name="action_sign_in">Se connecter</string>
+  <string name="action_create_account">Créer un compte</string>
+  <string name="action_back_to_sign_in">Retour à la connexion</string>
+  <string name="action_reset_password">Réinitialiser le mot de passe</string>
+  <string name="action_logout">Se déconnecter</string>
+  <string name="sign_up_title">Créez votre compte</string>
+  <string name="reset_title">Réinitialisez votre mot de passe</string>
 </resources>
