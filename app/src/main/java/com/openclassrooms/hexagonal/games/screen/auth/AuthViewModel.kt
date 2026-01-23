@@ -34,12 +34,7 @@ class AuthViewModel @Inject constructor(
     authRepository.authState
   ) { form, user ->
     val signedIn = user != null
-    form.copy(
-      isSignedIn = signedIn,
-      isLoading = if (signedIn) false else form.isLoading,
-      errorMessage = if (signedIn) null else form.errorMessage,
-      infoMessage = if (signedIn) null else form.infoMessage,
-    )
+    form.copy(isSignedIn = signedIn)
   }.stateIn(
     viewModelScope,
     SharingStarted.WhileSubscribed(5_000),
@@ -64,7 +59,26 @@ class AuthViewModel @Inject constructor(
   }
   
   fun signOut() {
+    formState.update { it.copy(isLoading = false, errorMessage = null, infoMessage = null) }
     authRepository.signOut()
+  }
+
+  fun deleteAccount() {
+    viewModelScope.launch {
+      formState.update { it.copy(isLoading = true, errorMessage = null, infoMessage = null) }
+      runCatching { authRepository.deleteAccount() }
+        .onFailure { throwable ->
+          formState.update {
+            it.copy(
+              isLoading = false,
+              errorMessage = throwable.message ?: "Unable to delete account"
+            )
+          }
+        }
+        .onSuccess {
+          formState.update { it.copy(isLoading = false) }
+        }
+    }
   }
   
   fun signUp() {

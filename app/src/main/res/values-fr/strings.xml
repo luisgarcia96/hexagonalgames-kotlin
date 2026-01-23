@@ -22,6 +22,12 @@
   <string name="action_back_to_sign_in">Retour à la connexion</string>
   <string name="action_reset_password">Réinitialiser le mot de passe</string>
   <string name="action_logout">Se déconnecter</string>
+  <string name="action_delete_account">Supprimer le compte</string>
+  <string name="action_cancel">Annuler</string>
+  <string name="settings_notifications_title">Notifications</string>
+  <string name="settings_account_title">Compte</string>
+  <string name="delete_account_title">Supprimer le compte ?</string>
+  <string name="delete_account_message">Cette action est définitive et supprimera votre compte.</string>
   <string name="sign_up_title">Créez votre compte</string>
   <string name="reset_title">Réinitialisez votre mot de passe</string>
 </resources>

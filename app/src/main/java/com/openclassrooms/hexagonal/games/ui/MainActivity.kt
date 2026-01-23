@@ -12,6 +12,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.openclassrooms.hexagonal.games.screen.Screen
 import com.openclassrooms.hexagonal.games.screen.ad.AddScreen
+import com.openclassrooms.hexagonal.games.screen.auth.AuthUiState
 import com.openclassrooms.hexagonal.games.screen.auth.AuthViewModel
 import com.openclassrooms.hexagonal.games.screen.auth.PasswordResetScreen
 import com.openclassrooms.hexagonal.games.screen.auth.SignInScreen
@@ -38,7 +39,11 @@ class MainActivity : ComponentActivity() {
       
       HexagonalGamesTheme {
         if (authUiState.value.isSignedIn) {
-          HexagonalGamesNavHost(navHostController = navController, authViewModel = authViewModel)
+          HexagonalGamesNavHost(
+            navHostController = navController,
+            authViewModel = authViewModel,
+            authUiState = authUiState.value
+          )
         } else {
           AuthNavHost(
             authViewModel = authViewModel
@@ -51,7 +56,11 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun HexagonalGamesNavHost(navHostController: NavHostController, authViewModel: AuthViewModel) {
+fun HexagonalGamesNavHost(
+  navHostController: NavHostController,
+  authViewModel: AuthViewModel,
+  authUiState: AuthUiState
+) {
   NavHost(
     navController = navHostController,
     startDestination = Screen.Homefeed.route
@@ -80,7 +89,11 @@ fun HexagonalGamesNavHost(navHostController: NavHostController, authViewModel: A
     }
     composable(route = Screen.Settings.route) {
       SettingsScreen(
-        onBackClick = { navHostController.navigateUp() }
+        onBackClick = { navHostController.navigateUp() },
+        isAccountActionInProgress = authUiState.isLoading,
+        accountErrorMessage = authUiState.errorMessage,
+        onSignOutClick = authViewModel::signOut,
+        onDeleteAccountClick = authViewModel::deleteAccount
       )
     }
   }

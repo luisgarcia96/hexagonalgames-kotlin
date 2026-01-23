@@ -42,4 +42,9 @@ class AuthRepository @Inject constructor(private val firebaseAuth: FirebaseAuth)
   fun signOut() {
     firebaseAuth.signOut()
   }
+
+  suspend fun deleteAccount() {
+    val user = firebaseAuth.currentUser ?: error("No authenticated user")
+    user.delete().await()
+  }
 }
