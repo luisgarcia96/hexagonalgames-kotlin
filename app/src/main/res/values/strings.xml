@@ -13,8 +13,10 @@
   <string name="hint_title">Title</string>
   <string name="hint_description">Description</string>
   <string name="action_save">Save</string>
+  <string name="action_select_image">Select an image</string>
   <string name="contentDescription_go_back">Go back</string>
   <string name="contentDescription_more">More</string>
+  <string name="contentDescription_selected_image">Selected image</string>
   <string name="contentDescription_notification_icon">Icone de notification</string>
   <string name="error_title">Title not valid</string>
   <string name="sign_in_title">Sign in to continue</string>

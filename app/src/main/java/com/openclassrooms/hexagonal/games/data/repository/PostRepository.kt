@@ -28,8 +28,8 @@ class PostRepository @Inject constructor(private val postApi: PostApi) {
    *
    * @param post The Post object to be added.
    */
-  fun addPost(post: Post?) {
-    postApi.addPost(post!!)
+  suspend fun addPost(post: Post) {
+    postApi.addPost(post)
   }
   
 }
