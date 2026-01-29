@@ -1,6 +1,7 @@
 package com.openclassrooms.hexagonal.games.screen.settings
 
 import androidx.lifecycle.ViewModel
+import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -11,18 +12,23 @@ import javax.inject.Inject
 class SettingsViewModel @Inject constructor() : ViewModel() {
   /**
    * Enables notifications for the application.
-   * TODO: Implement the logic to enable notifications, likely involving interactions with a notification manager.
    */
   fun enableNotifications() {
-    //TODO
+    FirebaseMessaging.getInstance()
+      .subscribeToTopic(CAMPAIGNS_TOPIC)
+      .addOnCompleteListener { }
   }
   
   /**
    * Disables notifications for the application.
-   * TODO: Implement the logic to disable notifications, likely involving interactions with a notification manager.
    */
   fun disableNotifications() {
-    //TODO
+    FirebaseMessaging.getInstance()
+      .unsubscribeFromTopic(CAMPAIGNS_TOPIC)
+      .addOnCompleteListener { }
   }
-  
+
+  companion object {
+    private const val CAMPAIGNS_TOPIC = "campaigns"
+  }
 }

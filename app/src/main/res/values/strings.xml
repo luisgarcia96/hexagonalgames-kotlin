@@ -6,6 +6,9 @@
   <string name="by">By %1$s %2$s</string>
   <string name="notification_enable">Enable notifications</string>
   <string name="notification_disable">Disable notifications</string>
+  <string name="notification_channel_campaigns_id">campaigns</string>
+  <string name="notification_channel_campaigns_name">Campaigns</string>
+  <string name="notification_channel_campaigns_description">Game updates and promotional offers.</string>
   <string name="description_button_add">Add</string>
   <string name="hint_title">Title</string>
   <string name="hint_description">Description</string>

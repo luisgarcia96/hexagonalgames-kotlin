@@ -6,6 +6,9 @@
   <string name="by">Par %1$s %2$s</string>
   <string name="notification_enable">Activer les notifications</string>
   <string name="notification_disable">Désactiver les notifications</string>
+  <string name="notification_channel_campaigns_id">campaigns</string>
+  <string name="notification_channel_campaigns_name">Campagnes</string>
+  <string name="notification_channel_campaigns_description">Actualités et offres promotionnelles.</string>
   <string name="description_button_add">Ajout</string>
   <string name="hint_title">Titre</string>
   <string name="hint_description">Description</string>
