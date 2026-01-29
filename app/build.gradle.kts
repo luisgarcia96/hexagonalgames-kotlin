@@ -65,7 +65,9 @@ dependencies {
   implementation(libs.navigation.compose)
   implementation(platform(libs.firebase.bom))
   implementation(libs.firebase.auth)
+  implementation(libs.firebase.firestore)
   implementation(libs.firebase.messaging)
+  implementation(libs.firebase.storage)
   
   implementation(libs.kotlinx.coroutines.android)
   implementation(libs.kotlinx.coroutines.play.services)
@@ -73,6 +75,8 @@ dependencies {
   implementation(libs.coil.compose)
   implementation(libs.accompanist.permissions)
   implementation(libs.firebase.ui.auth)
+  implementation(libs.firebase.ui.firestore)
+  implementation(libs.firebase.ui.storage)
 
   testImplementation(libs.junit)
   androidTestImplementation(libs.ext.junit)
