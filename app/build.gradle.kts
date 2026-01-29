@@ -3,7 +3,7 @@ plugins {
   alias(libs.plugins.kotlin)
   alias(libs.plugins.ksp)
   alias(libs.plugins.hilt)
-  alias(libs.plugins.google.services)
+  alias(libs.plugins.google.services) //Added for step 3
 }
 
 android {
@@ -63,20 +63,20 @@ dependencies {
 
   implementation(libs.activity.compose)
   implementation(libs.navigation.compose)
-  implementation(platform(libs.firebase.bom))
-  implementation(libs.firebase.auth)
-  implementation(libs.firebase.firestore)
-  implementation(libs.firebase.messaging)
-  implementation(libs.firebase.storage)
+  implementation(platform(libs.firebase.bom))//Added for step 3
+  implementation(libs.firebase.auth)//Added for step 4
+  implementation(libs.firebase.firestore) //Added for step 10
+  implementation(libs.firebase.messaging) //Added for step 7
+  implementation(libs.firebase.storage) //Added for step 10
   
   implementation(libs.kotlinx.coroutines.android)
-  implementation(libs.kotlinx.coroutines.play.services)
+  implementation(libs.kotlinx.coroutines.play.services) //Added for step 3
   
   implementation(libs.coil.compose)
   implementation(libs.accompanist.permissions)
-  implementation(libs.firebase.ui.auth)
-  implementation(libs.firebase.ui.firestore)
-  implementation(libs.firebase.ui.storage)
+  implementation(libs.firebase.ui.auth) //Added for step 3 and 4
+  implementation(libs.firebase.ui.firestore) //Added for step 10
+  implementation(libs.firebase.ui.storage) //Added for step 10
 
   testImplementation(libs.junit)
   androidTestImplementation(libs.ext.junit)
