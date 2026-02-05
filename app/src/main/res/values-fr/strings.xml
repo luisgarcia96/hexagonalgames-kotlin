@@ -13,8 +13,11 @@
   <string name="hint_title">Titre</string>
   <string name="hint_description">Description</string>
   <string name="action_save">Sauvegarder</string>
+  <string name="action_select_image">Sélectionner une image</string>
   <string name="contentDescription_go_back">Retour</string>
   <string name="contentDescription_more">Plus</string>
+  <string name="contentDescription_selected_image">Image sélectionnée</string>
+  <string name="contentDescription_post_image">Image de la publication</string>
   <string name="contentDescription_notification_icon">Icône de notification</string>
   <string name="error_title">Titre non valide</string>
   <string name="sign_in_title">Connectez-vous pour continuer</string>
@@ -26,6 +29,10 @@
   <string name="action_reset_password">Réinitialiser le mot de passe</string>
   <string name="action_logout">Se déconnecter</string>
   <string name="action_delete_account">Supprimer le compte</string>
+  <string name="action_delete_post">Supprimer la publication</string>
+  <string name="action_delete_comment">Supprimer le commentaire</string>
+  <string name="action_add_comment">Ajouter un commentaire</string>
+  <string name="action_save_comment">Enregistrer le commentaire</string>
   <string name="action_cancel">Annuler</string>
   <string name="settings_notifications_title">Notifications</string>
   <string name="settings_account_title">Compte</string>
@@ -33,4 +40,14 @@
   <string name="delete_account_message">Cette action est définitive et supprimera votre compte.</string>
   <string name="sign_up_title">Créez votre compte</string>
   <string name="reset_title">Réinitialisez votre mot de passe</string>
+  <string name="post_detail_title">Publication</string>
+  <string name="add_comment_title">Ajouter un commentaire</string>
+  <string name="hint_comment">Commentaire</string>
+  <string name="comments_title">Commentaires</string>
+  <string name="comment_author_fallback">Anonyme</string>
+  <string name="delete_post_title">Supprimer la publication ?</string>
+  <string name="delete_post_message">Cette action supprimera définitivement cette publication et tous ses commentaires.</string>
+  <string name="delete_comment_title">Supprimer le commentaire ?</string>
+  <string name="delete_comment_message">Cette action supprimera définitivement ce commentaire.</string>
+  <string name="post_deleted_message">Publication supprimée</string>
 </resources>

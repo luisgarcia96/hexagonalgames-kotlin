@@ -15,6 +15,15 @@ sealed class Screen(
   
   data object Settings : Screen("settings")
 
+  data object AddComment : Screen(
+    route = "addComment/{$POST_ID_ARG}",
+    navArguments = listOf(
+      navArgument(POST_ID_ARG) { type = NavType.StringType }
+    )
+  ) {
+    fun createRoute(postId: String) = "addComment/$postId"
+  }
+
   data object PostDetail : Screen(
     route = "postDetail/{$POST_ID_ARG}",
     navArguments = listOf(

@@ -3,6 +3,7 @@ package com.openclassrooms.hexagonal.games.screen.postdetail
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
@@ -13,7 +14,9 @@ import java.text.DateFormat
 import java.util.Date
 
 class CommentsAdapter(
-  options: FirestoreRecyclerOptions<CommentEntity>
+  options: FirestoreRecyclerOptions<CommentEntity>,
+  private val currentUserId: String?,
+  private val onDeleteComment: (commentId: String, commentAuthorId: String?) -> Unit
 ) : FirestoreRecyclerAdapter<CommentEntity, CommentsAdapter.CommentViewHolder>(options) {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentViewHolder {
@@ -23,6 +26,7 @@ class CommentsAdapter(
   }
 
   override fun onBindViewHolder(holder: CommentViewHolder, position: Int, model: CommentEntity) {
+    val commentId = snapshots.getSnapshot(position).id
     val author = model.author?.let { "${it.firstname} ${it.lastname}".trim() }
       ?.takeIf { it.isNotBlank() }
       ?: holder.itemView.context.getString(R.string.comment_author_fallback)
@@ -34,11 +38,22 @@ class CommentsAdapter(
     } else {
       ""
     }
+
+    val canDelete = currentUserId != null && model.author?.id == currentUserId
+    holder.delete.visibility = if (canDelete) View.VISIBLE else View.GONE
+    holder.delete.setOnClickListener(
+      if (canDelete) {
+        View.OnClickListener { onDeleteComment(commentId, model.author?.id) }
+      } else {
+        null
+      }
+    )
   }
 
   class CommentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val author: TextView = itemView.findViewById(R.id.commentAuthor)
     val body: TextView = itemView.findViewById(R.id.commentBody)
     val date: TextView = itemView.findViewById(R.id.commentDate)
+    val delete: ImageButton = itemView.findViewById(R.id.commentDelete)
   }
 }

@@ -1,5 +1,6 @@
 package com.openclassrooms.hexagonal.games.data.service
 
+import com.openclassrooms.hexagonal.games.data.model.CommentEntity
 import com.openclassrooms.hexagonal.games.domain.model.Post
 import kotlinx.coroutines.flow.Flow
 
@@ -29,4 +30,27 @@ interface PostApi {
    * @param post The Post object to be added.
    */
   suspend fun addPost(post: Post)
+
+  /**
+   * Adds a new comment to a post.
+   *
+   * @param postId The identifier of the parent post.
+   * @param comment The comment to add.
+   */
+  suspend fun addComment(postId: String, comment: CommentEntity)
+
+  /**
+   * Deletes a Post and its related data from the data source.
+   *
+   * @param postId The identifier of the post.
+   */
+  suspend fun deletePost(postId: String)
+
+  /**
+   * Deletes a comment from a given post.
+   *
+   * @param postId The identifier of the parent post.
+   * @param commentId The identifier of the comment.
+   */
+  suspend fun deleteComment(postId: String, commentId: String)
 }

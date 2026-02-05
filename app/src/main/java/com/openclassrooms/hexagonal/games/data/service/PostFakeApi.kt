@@ -1,5 +1,6 @@
 package com.openclassrooms.hexagonal.games.data.service
 
+import com.openclassrooms.hexagonal.games.data.model.CommentEntity
 import com.openclassrooms.hexagonal.games.domain.model.Post
 import com.openclassrooms.hexagonal.games.domain.model.User
 import kotlinx.coroutines.flow.Flow
@@ -70,6 +71,18 @@ class PostFakeApi : PostApi {
   
   override suspend fun addPost(post: Post) {
     posts.value.add(0, post)
+  }
+
+  override suspend fun addComment(postId: String, comment: CommentEntity) {
+    // No-op in fake API until comments are modeled in-memory.
+  }
+
+  override suspend fun deletePost(postId: String) {
+    posts.value.removeAll { it.id == postId }
+  }
+
+  override suspend fun deleteComment(postId: String, commentId: String) {
+    // No-op in fake API until comments are modeled in-memory.
   }
   
 }

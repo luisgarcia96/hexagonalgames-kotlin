@@ -17,6 +17,7 @@ import com.openclassrooms.hexagonal.games.screen.auth.AuthViewModel
 import com.openclassrooms.hexagonal.games.screen.auth.PasswordResetScreen
 import com.openclassrooms.hexagonal.games.screen.auth.SignInScreen
 import com.openclassrooms.hexagonal.games.screen.auth.SignUpScreen
+import com.openclassrooms.hexagonal.games.screen.comment.AddCommentScreen
 import com.openclassrooms.hexagonal.games.screen.homefeed.HomefeedScreen
 import com.openclassrooms.hexagonal.games.screen.postdetail.PostDetailScreen
 import com.openclassrooms.hexagonal.games.screen.postdetail.POST_ID_ARG
@@ -96,9 +97,22 @@ fun HexagonalGamesNavHost(
       val postId = backStackEntry.arguments?.getString(POST_ID_ARG).orEmpty()
       if (postId.isNotEmpty()) {
         PostDetailScreen(
-          onBackClick = { navHostController.navigateUp() }
+          onBackClick = { navHostController.navigateUp() },
+          onPostDeleted = { navHostController.navigateUp() },
+          onAddCommentClick = {
+            navHostController.navigate(Screen.AddComment.createRoute(postId))
+          }
         )
       }
+    }
+    composable(
+      route = Screen.AddComment.route,
+      arguments = Screen.AddComment.navArguments
+    ) {
+      AddCommentScreen(
+        onBackClick = { navHostController.navigateUp() },
+        onSaveClick = { navHostController.navigateUp() }
+      )
     }
     composable(route = Screen.Settings.route) {
       SettingsScreen(

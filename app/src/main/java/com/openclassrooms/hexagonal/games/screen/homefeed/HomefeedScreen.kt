@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.MoreVert
@@ -28,12 +29,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
@@ -133,8 +136,8 @@ private fun HomefeedList(
   onPostClick: (Post) -> Unit,
 ) {
   LazyColumn(
-    modifier = modifier.padding(8.dp),
-    verticalArrangement = Arrangement.spacedBy(8.dp),
+    modifier = modifier.padding(horizontal = 12.dp, vertical = 10.dp),
+    verticalArrangement = Arrangement.spacedBy(12.dp),
   ) {
     items(posts) { post ->
       HomefeedCell(
@@ -150,46 +153,53 @@ private fun HomefeedCell(
   post: Post,
   onPostClick: (Post) -> Unit,
 ) {
+  val authorName = "${post.author?.firstname.orEmpty()} ${post.author?.lastname.orEmpty()}"
+    .trim()
+    .ifBlank { stringResource(id = R.string.comment_author_fallback) }
+
   ElevatedCard(
     modifier = Modifier.fillMaxWidth(),
     onClick = {
       onPostClick(post)
     }) {
     Column(
-      modifier = Modifier.padding(8.dp),
+      modifier = Modifier.padding(12.dp),
+      verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
       Text(
-        text = stringResource(
-          id = R.string.by,
-          post.author?.firstname ?: "",
-          post.author?.lastname ?: ""
-        ),
-        style = MaterialTheme.typography.titleSmall
+        text = authorName,
+        style = MaterialTheme.typography.labelMedium,
+        color = MaterialTheme.colorScheme.onSurfaceVariant
       )
       Text(
         text = post.title,
-        style = MaterialTheme.typography.titleLarge
+        style = MaterialTheme.typography.titleLarge,
+        maxLines = 2,
+        overflow = TextOverflow.Ellipsis
       )
       if (post.photoUrl.isNullOrEmpty() == false) {
         AsyncImage(
           modifier = Modifier
-            .padding(top = 8.dp)
             .fillMaxWidth()
             .heightIn(max = 200.dp)
-            .aspectRatio(ratio = 16 / 9f),
+            .aspectRatio(ratio = 16 / 9f)
+            .clip(RoundedCornerShape(10.dp)),
           model = post.photoUrl,
           imageLoader = LocalContext.current.imageLoader.newBuilder()
             .logger(DebugLogger())
             .build(),
           placeholder = ColorPainter(Color.DarkGray),
-          contentDescription = "image",
+          contentDescription = stringResource(id = R.string.contentDescription_post_image),
           contentScale = ContentScale.Crop,
         )
       }
       if (post.description.isNullOrEmpty() == false) {
         Text(
+          modifier = Modifier.padding(top = 2.dp),
           text = post.description,
-          style = MaterialTheme.typography.bodyMedium
+          style = MaterialTheme.typography.bodyMedium,
+          maxLines = 4,
+          overflow = TextOverflow.Ellipsis
         )
       }
     }

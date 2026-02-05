@@ -2,6 +2,7 @@ package com.openclassrooms.hexagonal.games.data.service
 
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import com.openclassrooms.hexagonal.games.data.model.CommentEntity
 import com.openclassrooms.hexagonal.games.data.model.PostEntity
 import com.openclassrooms.hexagonal.games.data.model.toDomain
 import com.openclassrooms.hexagonal.games.data.model.toEntity
@@ -57,5 +58,35 @@ class PostFirestoreApi @Inject constructor(
 
   override suspend fun addPost(post: Post) {
     postsCollection.document(post.id).set(post.toEntity()).await()
+  }
+
+  override suspend fun addComment(postId: String, comment: CommentEntity) {
+    postsCollection
+      .document(postId)
+      .collection("comments")
+      .document(comment.id)
+      .set(comment)
+      .await()
+  }
+
+  override suspend fun deletePost(postId: String) {
+    val postRef = postsCollection.document(postId)
+    val commentsSnapshot = postRef.collection("comments").get().await()
+    val batch = firestore.batch()
+
+    commentsSnapshot.documents.forEach { document ->
+      batch.delete(document.reference)
+    }
+    batch.delete(postRef)
+    batch.commit().await()
+  }
+
+  override suspend fun deleteComment(postId: String, commentId: String) {
+    postsCollection
+      .document(postId)
+      .collection("comments")
+      .document(commentId)
+      .delete()
+      .await()
   }
 }

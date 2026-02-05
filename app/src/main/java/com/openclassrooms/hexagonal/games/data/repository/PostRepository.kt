@@ -1,5 +1,6 @@
 package com.openclassrooms.hexagonal.games.data.repository
 
+import com.openclassrooms.hexagonal.games.data.model.CommentEntity
 import com.openclassrooms.hexagonal.games.data.service.PostApi
 import com.openclassrooms.hexagonal.games.domain.model.Post
 import kotlinx.coroutines.flow.Flow
@@ -32,6 +33,18 @@ class PostRepository @Inject constructor(private val postApi: PostApi) {
    */
   suspend fun addPost(post: Post) {
     postApi.addPost(post)
+  }
+
+  suspend fun addComment(postId: String, comment: CommentEntity) {
+    postApi.addComment(postId, comment)
+  }
+
+  suspend fun deletePost(postId: String) {
+    postApi.deletePost(postId)
+  }
+
+  suspend fun deleteComment(postId: String, commentId: String) {
+    postApi.deleteComment(postId, commentId)
   }
   
 }
