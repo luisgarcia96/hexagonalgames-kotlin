@@ -15,6 +15,13 @@ interface PostApi {
    * @return A list of Posts sorted by creation date (newest first).
    */
   fun getPostsOrderByCreationDateDesc(): Flow<List<Post>>
+
+  /**
+   * Retrieves a single Post by its ID.
+   *
+   * @param postId The identifier of the post.
+   */
+  fun getPost(postId: String): Flow<Post?>
   
   /**
    * Adds a new Post to the data source.

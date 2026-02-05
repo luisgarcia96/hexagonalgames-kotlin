@@ -77,6 +77,7 @@ dependencies {
   implementation(libs.firebase.ui.auth) //Added for step 3 and 4
   implementation(libs.firebase.ui.firestore) //Added for step 10
   implementation(libs.firebase.ui.storage) //Added for step 10
+  implementation(libs.recyclerview)
 
   testImplementation(libs.junit)
   androidTestImplementation(libs.ext.junit)

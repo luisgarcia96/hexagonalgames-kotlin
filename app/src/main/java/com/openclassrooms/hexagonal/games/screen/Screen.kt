@@ -1,6 +1,9 @@
 package com.openclassrooms.hexagonal.games.screen
 
 import androidx.navigation.NamedNavArgument
+import androidx.navigation.NavType
+import androidx.navigation.navArgument
+import com.openclassrooms.hexagonal.games.screen.postdetail.POST_ID_ARG
 
 sealed class Screen(
   val route: String,
@@ -11,4 +14,13 @@ sealed class Screen(
   data object AddPost : Screen("addPost")
   
   data object Settings : Screen("settings")
+
+  data object PostDetail : Screen(
+    route = "postDetail/{$POST_ID_ARG}",
+    navArguments = listOf(
+      navArgument(POST_ID_ARG) { type = NavType.StringType }
+    )
+  ) {
+    fun createRoute(postId: String) = "postDetail/$postId"
+  }
 }

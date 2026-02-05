@@ -37,6 +37,24 @@ class PostFirestoreApi @Inject constructor(
     awaitClose { registration.remove() }
   }
 
+  override fun getPost(postId: String): Flow<Post?> = callbackFlow {
+    val registration = postsCollection
+      .document(postId)
+      .addSnapshotListener { snapshot, error ->
+        if (error != null) {
+          close(error)
+          return@addSnapshotListener
+        }
+
+        val entity = snapshot?.toObject(PostEntity::class.java)
+        val post = entity?.copy(id = snapshot.id)?.toDomain()
+
+        trySend(post).isSuccess
+      }
+
+    awaitClose { registration.remove() }
+  }
+
   override suspend fun addPost(post: Post) {
     postsCollection.document(post.id).set(post.toEntity()).await()
   }

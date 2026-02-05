@@ -18,6 +18,8 @@ import com.openclassrooms.hexagonal.games.screen.auth.PasswordResetScreen
 import com.openclassrooms.hexagonal.games.screen.auth.SignInScreen
 import com.openclassrooms.hexagonal.games.screen.auth.SignUpScreen
 import com.openclassrooms.hexagonal.games.screen.homefeed.HomefeedScreen
+import com.openclassrooms.hexagonal.games.screen.postdetail.PostDetailScreen
+import com.openclassrooms.hexagonal.games.screen.postdetail.POST_ID_ARG
 import com.openclassrooms.hexagonal.games.screen.settings.SettingsScreen
 import com.openclassrooms.hexagonal.games.ui.theme.HexagonalGamesTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -68,7 +70,7 @@ fun HexagonalGamesNavHost(
     composable(route = Screen.Homefeed.route) {
       HomefeedScreen(
         onPostClick = {
-          //TODO
+          navHostController.navigate(Screen.PostDetail.createRoute(it.id))
         },
         onSettingsClick = {
           navHostController.navigate(Screen.Settings.route)
@@ -86,6 +88,17 @@ fun HexagonalGamesNavHost(
         onBackClick = { navHostController.navigateUp() },
         onSaveClick = { navHostController.navigateUp() }
       )
+    }
+    composable(
+      route = Screen.PostDetail.route,
+      arguments = Screen.PostDetail.navArguments
+    ) { backStackEntry ->
+      val postId = backStackEntry.arguments?.getString(POST_ID_ARG).orEmpty()
+      if (postId.isNotEmpty()) {
+        PostDetailScreen(
+          onBackClick = { navHostController.navigateUp() }
+        )
+      }
     }
     composable(route = Screen.Settings.route) {
       SettingsScreen(
