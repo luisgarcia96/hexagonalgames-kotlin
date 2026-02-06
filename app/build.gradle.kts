@@ -79,7 +79,10 @@ dependencies {
   implementation(libs.firebase.ui.storage) //Added for step 10
   implementation(libs.recyclerview)
 
+  // Added for step 15 (unit tests)
   testImplementation(libs.junit)
+  testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.0")
+  testImplementation("io.mockk:mockk:1.13.10")
   androidTestImplementation(libs.ext.junit)
   androidTestImplementation(libs.espresso.core)
 }
